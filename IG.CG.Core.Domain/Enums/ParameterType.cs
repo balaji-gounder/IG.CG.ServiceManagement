@@ -1,0 +1,32 @@
+﻿namespace IG.CG.Core.Domain.Enums
+{
+    public enum ParameterType
+    {
+        DocumentType,
+        StatusType,
+        FollowupMode,
+        RightType,
+        CustomerCategory,
+        LeadType,
+        Segment,
+        CustAddressType,
+        ContactType,
+        DealerType,
+        TravelClaim,
+        IssueType,
+        ActivityType,
+        ComplaintType,
+        CallType,
+        ContractTypes,
+        ContractSubTypes,
+        AttachmentType,
+        RewindingType,
+        DefectTypeCategory,
+        LeadSource,
+        SkillType,
+        UserType,
+        LeadRole,
+        LeadWinProbability,
+        CustomerType
+    }
+}
