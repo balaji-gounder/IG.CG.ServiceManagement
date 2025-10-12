@@ -140,7 +140,15 @@ namespace IG.CG.Core.Domain.Entities
         public string? TotalRows { get; set; }
         public bool? IsEditable { get; set; }
 
-
+        public string? RegionName { get; set; }
+        public string? BranchName { get; set; }
+        public string? ASCName { get; set; }
+        public string? ASMName { get; set; }
+        public string? ClaimGenerationDate { get; set; }
+        public string? TicketCreatedOn { get; set; }
+        public string? DivisionName { get; set; }
+        public string? SerialNo { get; set; }
+        public string? ProductLineName { get; set; }
 
     }
     public class ASMServiceRequestClaimApprovalEntity
@@ -266,6 +274,7 @@ namespace IG.CG.Core.Domain.Entities
     public class AscIBNListEntity
     {
         public int IBNId { get; set; }
+        public string? TotalRows { get; set; }
         public string? Month { get; set; }
         public string? Year { get; set; }
         public string? AscCode { get; set; }
@@ -278,6 +287,7 @@ namespace IG.CG.Core.Domain.Entities
         public string? CountOfServiceClaims { get; set; }
         public string? AmountOfServiceClaims { get; set; }
     }
+
     public class IBNPdfInfoEntity
     {
         public int PrintStatusCount { get; set; }
@@ -396,6 +406,8 @@ namespace IG.CG.Core.Domain.Entities
         public int? SpecialApprovalId { get; set; }
         public int? ServiceTicketId { get; set; }
         public string? ApprovalRemarks { get; set; }
+
+        public string? Claimamount1 { get; set; }
         public int IsApproved { get; set; }
 
     }

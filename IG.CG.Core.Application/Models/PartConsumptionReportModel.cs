@@ -44,5 +44,6 @@ namespace IG.CG.Core.Application.Models
         public string? Quantity { get; set; }
 
         public string? Rate { get; set; }
+        public string? Total { get; set; }
     }
 }

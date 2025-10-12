@@ -45,9 +45,9 @@ namespace IG.CG.ServiceManagement.WebApi.Controllers
 
 
         [HttpGet("GetAllSerialNoWiseTicket")]
-        public async Task<ActionResult<IEnumerable<ASCServiceRequestModel>>> GetAlSerialNoWiseTicketAsync([FromQuery] string? SrNo)
+        public async Task<ActionResult<IEnumerable<ASCServiceRequestModel>>> GetAlSerialNoWiseTicketAsync([FromQuery] string? SrNo,string? ServiceTicketNumber)
         {
-            var ASCServiceRequest = await _ascServiceRequestService.GetAlSerialNoWiseTicketAsync(SrNo);
+            var ASCServiceRequest = await _ascServiceRequestService.GetAlSerialNoWiseTicketAsync(SrNo, ServiceTicketNumber);
             if (ASCServiceRequest is null)
             {
                 return NotFound();

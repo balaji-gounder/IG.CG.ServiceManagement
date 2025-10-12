@@ -24,6 +24,7 @@ namespace IG.CG.Infrastrcture.Persistence.Repository
             para.Add("@Warranty", asmServiceRequestClaimFilter.ServiceTicketType);
             para.Add("@DivisionCode", asmServiceRequestClaimFilter.DivisionCode);
             para.Add("@RegionCode", asmServiceRequestClaimFilter.RegionCode);
+            para.Add("@ProductlineCode", asmServiceRequestClaimFilter.ProductlineCode);
             para.Add("@Month", asmServiceRequestClaimFilter.Month);
             para.Add("@UserId", userId);
             para.Add("@PageSize", asmServiceRequestClaimFilter.PageSize);
@@ -174,6 +175,7 @@ namespace IG.CG.Infrastrcture.Persistence.Repository
             para.Add("@Year", AscIBNGeneratedListFilter.Year);
             para.Add("@DivisionCode", AscIBNGeneratedListFilter.DivisionCode);
             para.Add("@AscCode", AscIBNGeneratedListFilter.AscCode);
+            para.Add("@IBNNumber", AscIBNGeneratedListFilter.IBNNumber);
             para.Add("@UserId", UserId);
             para.Add("@PageSize", AscIBNGeneratedListFilter.PageSize);
             para.Add("@PageNumber", AscIBNGeneratedListFilter.PageNumber);
@@ -229,6 +231,8 @@ namespace IG.CG.Infrastrcture.Persistence.Repository
             para.Add("@IsASMUnApproved", ClaimLineItemsViewFilter.IsASMUnApproved);
             para.Add("@IsRSMUnApproved", ClaimLineItemsViewFilter.IsRSMUnApproved);
             para.Add("@ServiceTicketNo", ClaimLineItemsViewFilter.ServiceTicketNo);
+            para.Add("@Region", ClaimLineItemsViewFilter.Region);
+            para.Add("@Branch", ClaimLineItemsViewFilter.Branch);
             para.Add("@AscCode", ClaimLineItemsViewFilter.AscCode);
             para.Add("@DivCode", ClaimLineItemsViewFilter.DivCode);
             para.Add("@ProductLineCode", ClaimLineItemsViewFilter.ProductLineCode);
@@ -317,6 +321,7 @@ namespace IG.CG.Infrastrcture.Persistence.Repository
             para.Add("@SpecialApprovalId", updateRSMSpecialApprovalEntity.SpecialApprovalId);
             para.Add("@ServiceTicketId", updateRSMSpecialApprovalEntity.ServiceTicketId);
             para.Add("@ApprovalRemarks", updateRSMSpecialApprovalEntity.ApprovalRemarks);
+            para.Add("@Claimamount1", updateRSMSpecialApprovalEntity.Claimamount1);
             para.Add("@IsApproved", updateRSMSpecialApprovalEntity.IsApproved);
             para.Add("@UserId", UserId);
 

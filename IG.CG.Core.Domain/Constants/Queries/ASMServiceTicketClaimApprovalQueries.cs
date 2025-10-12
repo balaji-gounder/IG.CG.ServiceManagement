@@ -7,9 +7,9 @@ namespace IG.CG.Core.Domain.Constants.Queries
         public static string GetAllAsmServiceTicketClaimAttachmentList = "AsmServiceTicketClaimAttachmentListGetAll";
         public static string GetAllAscServiceTicketClaimInfo = "AscServiceTicketClaimInfoGetAll";
         public static string GetAllAsmServiceTicketClaimLineItems = "AsmServiceTicketClaimLineItemsGetAll";
-        public static string GetAllAscServiceTicketClaimLineItems = "AscClaimApprovalLineItemsGetAll"; //claim approval
+        public static string GetAllAscServiceTicketClaimLineItems = "AscClaimApprovalLineItemsGetAll";
         public static string UpdateServiceTicketClaimApproval = "AsmServiceTicketClaimApprovalUpdate";
-        public static string GetAllAscServiceTicketClaimItemsManageApproval = "AscServiceTicketClaimLineItemsGetAll";// manage Approval
+        public static string GetAllAscServiceTicketClaimItemsManageApproval = "AscServiceTicketClaimLineItemsGetAll";
         public static string UpdateAscServiceTicketClaimReApproval = "AscServiceTicketClaimReApprovalUpdate";
         public static string UpdateAscServiceTicketClaimAcceptRejection = "AscServiceTicketClaimAcceptRejectionUpdate";
         public static string InsertAscSpecialApprovalClaim = "AscSpecialApprovalClaimInsert";

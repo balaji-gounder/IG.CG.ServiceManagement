@@ -317,6 +317,7 @@ namespace IG.CG.Infrastrcture.Persistence.Repository
             para.Add("@DefectId", ProCustObj.DefectId);
             para.Add("@UserType", ProCustObj.UserType);
             para.Add("@DealerCode", ProCustObj.DealerCode);
+            para.Add("@BusinessCallID", ProCustObj.BusinessCallID);
             para.Add("@InvoiceFile", InvoiceFile);
             para.Add("@FIRCopy", FIRCopy);
             return await _prodCustInfoRepository.ExecuteScalarAsync<string?>(ProdCustInfoQueries.UpsertServiceTicketActivityProductInsert, para);

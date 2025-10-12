@@ -39,10 +39,11 @@ namespace IG.CG.Infrastrcture.Persistence.Repository
 
 
 
-        public async Task<IList<SerialNoWiseTicketEntity>> GetAlSerialNoWiseTicketAsync(string? SrNo)
+        public async Task<IList<SerialNoWiseTicketEntity>> GetAlSerialNoWiseTicketAsync(string? SrNo,string? ServiceTicketnumber)
         {
             var para = new DynamicParameters();
             para.Add("@SrNo", SrNo);
+            para.Add("@ServiceTicketNumber", ServiceTicketnumber);
             var lstASCServiceRequest = await _ascServiceRequestRepository.GetAllAsync<SerialNoWiseTicketEntity>(ASCServiceRequestQueries.AllSerialNoWiseTicket, para);
             return lstASCServiceRequest.ToList();
         }

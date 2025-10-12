@@ -146,6 +146,7 @@ namespace IG.CG.Core.Application.Models
         public string? Kva { get; set; }
         public string? CallTypeId { get; set; }
         public string? DefectId { get; set; }
+        public string? BusinessCallID { get; set; }
         public string? UserType { get; set; }
         public string? DealerCode { get; set; }
         public List<IFormFile>? InvoiceFile { get; set; }

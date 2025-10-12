@@ -194,6 +194,12 @@ namespace IG.CG.ServiceManagement.WebApi.Extensions
             services.AddSingleton<IUniversalSearchService, UniversalSearchService>();
             services.AddSingleton<IUniversalSearchRepository, UniversalSearchRepository>();
 
+            services.AddSingleton<IOEMService, OEMService>();
+            services.AddSingleton<IOEMRepository, OEMRepository>();
+
+            services.AddSingleton<IIBNManagmentService,IBNManagmentService>();
+            services.AddSingleton<IIBNManagmentRepository, IBNManagmentRepository>();
+
 
             return services;
         }

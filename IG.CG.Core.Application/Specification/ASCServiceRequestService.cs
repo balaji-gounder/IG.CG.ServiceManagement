@@ -25,9 +25,9 @@ namespace IG.CG.Core.Application.Specification
         }
 
 
-        public async Task<IList<SerialNoWiseTicketModel>> GetAlSerialNoWiseTicketAsync(string? SrNo)
+        public async Task<IList<SerialNoWiseTicketModel>> GetAlSerialNoWiseTicketAsync(string? SrNo,string? ServiceTicketNumber)
         {
-            var SerialNoWiseTicketRequest = await _ascServiceRequestRepository.GetAlSerialNoWiseTicketAsync(SrNo);
+            var SerialNoWiseTicketRequest = await _ascServiceRequestRepository.GetAlSerialNoWiseTicketAsync(SrNo, ServiceTicketNumber);
             var SrTicketModel = _mapper.Map<List<SerialNoWiseTicketModel>>(SerialNoWiseTicketRequest.ToList());
             return SrTicketModel;
         }

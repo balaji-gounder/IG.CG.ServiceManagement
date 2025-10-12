@@ -1,4 +1,5 @@
 ﻿using IG.CG.Core.Application.Models;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.IO.Compression;
@@ -17,38 +18,54 @@ namespace IG.CG.ServiceManagement.API.Helpers
             using var writer = new StreamWriter(stream, encoding, bufferSize: 8192, leaveOpen: true);
 
             var props = typeof(T).GetProperties(BindingFlags.Public | BindingFlags.Instance)
-                                 .ToDictionary(p => p.Name, p => p);
+                                 .ToDictionary(p => p.Name, p => p, StringComparer.OrdinalIgnoreCase);
 
-            var sb = new StringBuilder(2048);
+            var idLikeKeys = new HashSet<string>(StringComparer.OrdinalIgnoreCase)
+            {
+                "ServiceTicketNumber",
+                "IBNNumber",
+                "ProductCode",
+                "SerialNo",
+                "ProductSerialNumber",
+                "TicketNumber",
+                "SomeCodeOrId"
+            };
 
-            writer.WriteLine(string.Join(",", headerMap.Values));
+            string EscapeCsvField(string raw)
+            {
+                var escaped = (raw ?? string.Empty).Replace("\"", "\"\"");
+                return $"\"{escaped}\"";
+            }
+
+            var headerTitles = headerMap.Values.Select(v => EscapeCsvField(v));
+            writer.WriteLine(string.Join(",", headerTitles));
 
             foreach (var item in data)
             {
-                sb.Clear();
+                var rowFields = new List<string>(headerMap.Count);
+
                 foreach (var key in headerMap.Keys)
                 {
+                    object rawObj = null;
                     if (props.TryGetValue(key, out var prop))
                     {
-                        var value = prop.GetValue(item)?.ToString() ?? "";
+                        rawObj = prop.GetValue(item, null);
+                    }
 
-                        if (key == "ServiceTicketNumber")
-                            value = "\t" + value;
+                    var text = rawObj?.ToString() ?? string.Empty;
 
-                        value = $"\"{value.Replace("\"", "\"\"")}\"";
-                        sb.Append(value).Append(',');
+                    if (idLikeKeys.Contains(key) && !string.IsNullOrEmpty(text))
+                    {
+                        var excelText = $"=\"{text}\"";
+                        rowFields.Add(EscapeCsvField(excelText));
                     }
                     else
                     {
-                        sb.Append("\"\"").Append(',');
+                        rowFields.Add(EscapeCsvField(text));
                     }
                 }
 
-                if (sb.Length > 0)
-                {
-                    sb.Length--;
-                    writer.WriteLine(sb.ToString());
-                }
+                writer.WriteLine(string.Join(",", rowFields));
             }
 
             writer.Flush();
@@ -121,9 +138,10 @@ namespace IG.CG.ServiceManagement.API.Helpers
             };
         }
 
-        internal static Stream GenerateCsvStream<T>(IList<AscServiceTicketInfoComplaintReportModel> data, Dictionary<string, string> dictionary)
+        internal static Stream GenerateCsvStream<TModel>(IList<TModel> data, Dictionary<string, string> dictionary)
         {
-            throw new NotImplementedException();
+            var list = data?.ToList() ?? new List<TModel>();
+            return GenerateCsvStream(list, dictionary);
         }
     }
 }

@@ -41,5 +41,13 @@
 
         public static string AllClaimApprovalTATReportReport = "ClaimApprovalTATReportGetAll";
 
+        public static string UpsertOEM = "proc_CGCare_Trn_UpdateOEM";
+
+        public static string GETOEMDATA = "proc_ServiceListing_AutoComplete_GetOEMData";
+
+        public static string IBNManagment = "proc_CGCare_rpt_IBNReport";
+
+
+
     }
 }

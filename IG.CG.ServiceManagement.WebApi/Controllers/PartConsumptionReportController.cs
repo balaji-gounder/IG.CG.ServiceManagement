@@ -1,6 +1,7 @@
 ﻿using IG.CG.Core.Application.Interfaces.Services;
 using IG.CG.Core.Application.Models;
 using IG.CG.Core.Application.Specification;
+using IG.CG.ServiceManagement.WebApi.Helpers;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
@@ -25,14 +26,23 @@ namespace IG.CG.ServiceManagement.WebApi.Controllers
             string userID = User.Identity.Name;
             partConsumptionReportFilter.UserID = userID;
             var partconsumption = await _partCosnumptionReportServiceService.GetPartConsumptionReportAsync(partConsumptionReportFilter);
-            if (partconsumption is null)
-            {
+
+            if (partconsumption == null)
                 return NotFound();
-            }
-            else
+
+            if (partConsumptionReportFilter.PageSize == 0)
             {
-                return Ok(partconsumption);
+                var csvZipStream = PartConsumptionReportCsvExportHelper.GenerateZippedCsvStream(
+                    partconsumption.ToList(),
+                    PartConsumptionReportCsvExportHelper.PartConsumptionHeaderMap(),
+                    $"PartConsumptionReport_{DateTime.Now:yyyyMMdd_HHmmss}.csv"
+                );
+
+                return File(csvZipStream, "application/zip", $"PartConsumptionReport__{DateTime.Now:yyyyMMdd_HHmmss}.zip");
             }
+
+            return Ok(partconsumption);
+
         }
     }
 }

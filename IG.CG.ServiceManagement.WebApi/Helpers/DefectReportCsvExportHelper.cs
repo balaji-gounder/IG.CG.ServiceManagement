@@ -34,17 +34,43 @@ namespace IG.CG.ServiceManagement.API.Helpers
 
             writer.WriteLine(string.Join(",", headerMap.Values));
 
+            var props = typeof(T).GetProperties(BindingFlags.Public | BindingFlags.Instance)
+                                 .ToDictionary(p => p.Name, p => p, StringComparer.OrdinalIgnoreCase);
+
+            var idLikeKeys = new HashSet<string>(StringComparer.OrdinalIgnoreCase)
+            {
+                "ServiceTicketNumber",
+                "IBNNumber",
+                "ProductCode",
+                "SerialNo",
+                "ProductSerialNumber",
+                "TicketNumber",
+                "SomeCodeOrId"
+            };
+
             foreach (var item in data)
             {
                 var values = headerMap.Keys.Select(key =>
                 {
-                    var prop = typeof(T).GetProperty(key);
-                    var val = prop?.GetValue(item, null);
-                    return $"\"{(key == "ServiceTicketNumber" ? "\t" + val?.ToString() : val?.ToString())?.Replace("\"", "\"\"")}\"";
+                    object raw = null;
+                    if (props.TryGetValue(key, out var prop))
+                        raw = prop.GetValue(item, null);
+
+                    var text = raw?.ToString() ?? string.Empty;
+                    text = text.Replace("\"", "\"\"");
+
+                    if (idLikeKeys.Contains(key) && !string.IsNullOrEmpty(text))
+                    {
+                        return $"\"'{text}\"";
+                    }
+
+                    return $"\"{text}\"";
                 });
 
                 writer.WriteLine(string.Join(",", values));
             }
+
+            writer.Flush();
         }
 
         private static Dictionary<string, string> TicketHeaderMap() => new Dictionary<string, string>

@@ -2,6 +2,8 @@
 using IG.CG.Core.Application.Interfaces.Services;
 using IG.CG.Core.Application.Models;
 using IG.CG.Core.Application.Models.Filters;
+using IG.CG.ServiceManagement.API.Helpers;
+using IG.CG.ServiceManagement.WebApi.Helpers;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
@@ -257,14 +259,22 @@ namespace IG.CG.ServiceManagement.WebApi.Controllers
         public async Task<ActionResult<IEnumerable<ASCServiceRequestClaimItemsManageApprovalModel>>> GetAllServiceRequestClaimLineItemsView([FromQuery] ClaimLineItemsViewFilter ClaimLineItemsViewFilter)
         {
             var ServiceRequestClaimLineItems = await _ASMServiceTicketClaimApprovalService.GetAllServiceRequestClaimLineItemsViewAsync(ClaimLineItemsViewFilter, User?.Identity?.Name);
-            if (ServiceRequestClaimLineItems is null)
-            {
+
+            if (ServiceRequestClaimLineItems == null)
                 return NotFound();
-            }
-            else
+
+            if (ClaimLineItemsViewFilter.PageSize == 0)
             {
-                return Ok(ServiceRequestClaimLineItems);
+                var csvZipStream = ClaimListingCsvExportHelper.GenerateZippedCsvStream(
+                    ServiceRequestClaimLineItems.ToList(),
+                    ClaimListingCsvExportHelper.ClaimlistingHeaderMap(),
+                    $"ClaimListing_{DateTime.Now:yyyyMMdd_HHmmss}.csv"
+                );
+
+                return File(csvZipStream, "application/zip", $"ClaimListing__{DateTime.Now:yyyyMMdd_HHmmss}.zip");
             }
+
+            return Ok(ServiceRequestClaimLineItems);
         }
 
         [HttpPost("UpdateAsmServiceTicketClaimAmountDistance")]

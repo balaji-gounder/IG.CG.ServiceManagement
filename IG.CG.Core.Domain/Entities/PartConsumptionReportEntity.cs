@@ -43,6 +43,6 @@ namespace IG.CG.Core.Domain.Entities
         public string? SpareSerialNumber { get; set; }
         public string? Quantity { get; set; }
         public string? Rate { get; set; }
-
+        public string? Total { get; set; }
     }
 }

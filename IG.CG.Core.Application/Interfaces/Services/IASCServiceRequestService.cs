@@ -15,6 +15,6 @@ namespace IG.CG.Core.Application.Interfaces.Services
 
         Task<IList<ASCServiceRequestModel>> GetAllCallCenterRequestOpenTicketAsync(CallCenterRequestOpenTicketFilter ascServiceRequestFilter, string? userId);
 
-        Task<IList<SerialNoWiseTicketModel>> GetAlSerialNoWiseTicketAsync(string? seSrNo);
+        Task<IList<SerialNoWiseTicketModel>> GetAlSerialNoWiseTicketAsync(string? seSrNo,string? ServiceTicketNumber);
     }
 }

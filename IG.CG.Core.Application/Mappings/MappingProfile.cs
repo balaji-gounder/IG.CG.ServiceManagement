@@ -613,7 +613,11 @@ namespace IG.CG.Core.Application.Mappings
             CreateMap<AsmIBNTicketClaimAmountModel, AsmIBNTicketClaimAmountEntity>();
             CreateMap<AsmIBNTicketClaimAmountEntity, AsmIBNTicketClaimAmountModel>();
 
+            CreateMap<OEMModel, OEMEntity>();
+            CreateMap<OEMEntity, OEMModel>();
 
+            CreateMap<IBNManagmentModel, IBNManagmentEntity>();
+            CreateMap<IBNManagmentEntity, IBNManagmentModel>();
 
 
 
