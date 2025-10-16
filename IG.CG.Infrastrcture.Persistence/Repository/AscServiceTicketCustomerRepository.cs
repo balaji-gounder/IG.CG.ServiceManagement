@@ -210,7 +210,6 @@ namespace IG.CG.Infrastrcture.Persistence.Repository
 
                     if (lstSTFirSP != null)
                     {
-
                         foreach (var itemFirSp in lstSTFirSP)
                         {
                             ObjStFirSP = new SpareDetailsDisplayEntity();
@@ -219,7 +218,7 @@ namespace IG.CG.Infrastrcture.Persistence.Repository
                             ObjStFirSP.SpareName = itemFirSp.SpareName;
                             ObjStFirSP.quantity = itemFirSp.quantity;
                             ObjStFirSP.Remarks = itemFirSp.Remarks;
-
+                            ObjStFirSP.SpareCost = itemFirSp.SpareCost;
                             STFirSPlist.Add(ObjStFirSP);
                         }
                     }
@@ -517,6 +516,7 @@ namespace IG.CG.Infrastrcture.Persistence.Repository
                             ObjStFirSP.serialNumbers = itemFirSp.serialNumbers;
                             ObjStFirSP.SpareName = itemFirSp.SpareName;
                             ObjStFirSP.quantity = itemFirSp.quantity;
+                            ObjStFirSP.SpareCost = itemFirSp.SpareCost;
                             STFirSPlist.Add(ObjStFirSP);
                         }
                     }

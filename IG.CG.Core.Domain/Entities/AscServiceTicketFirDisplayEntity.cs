@@ -53,7 +53,7 @@ namespace IG.CG.Core.Domain.Entities
         public string quantity { get; set; }
         public string serialNumbers { get; set; }
         public string Remarks { get; set; }
-
+        public string SpareCost { get; set; }
     }
 
     public class FIRDefectListDisplayEntity
