@@ -28,5 +28,6 @@
 
         public string? ApprovedClaimAmount { get; set; }
         public string? Remarks { get; set; }
+        public string? IBN { get; set; }
     }
 }
